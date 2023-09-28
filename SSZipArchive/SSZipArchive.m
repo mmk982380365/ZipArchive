@@ -418,7 +418,7 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
                 [delegate zipArchiveProgressEvent:(NSInteger)currentPosition total:(NSInteger)fileSize];
             }
             
-            char *filename = (char *)malloc(fileInfo.size_filename + 1);
+            char *filename = (char *)calloc(1, fileInfo.size_filename + 1);
             if (filename == NULL)
             {
                 success = NO;
@@ -1058,7 +1058,7 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
     
     [SSZipArchive zipInfo:&zipInfo setAttributesOfItemAtPath:path];
     
-    void *buffer = malloc(CHUNK);
+    void *buffer = calloc(1, CHUNK);
     if (buffer == NULL)
     {
         fclose(input);
@@ -1335,7 +1335,7 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo)
     const char *hexChars = "0123456789ABCDEF";
     NSUInteger length = self.length;
     const unsigned char *bytes = self.bytes;
-    char *chars = malloc(length * 2);
+    char *chars = calloc(1, length * 2);
     if (chars == NULL) {
         // we directly raise an exception instead of using NSAssert to make sure assertion is not disabled as this is irrecoverable
         [NSException raise:@"NSInternalInconsistencyException" format:@"failed malloc" arguments:nil];

@@ -221,7 +221,7 @@ int32_t mz_os_get_file_date(const char *path, time_t *modified_date, time_t *acc
     if (strcmp(path, "-") != 0) {
         /* Not all systems allow stat'ing a file with / appended */
         len = strlen(path);
-        name = (char *)malloc(len + 1);
+        name = (char *)calloc(1, len + 1);
         strncpy(name, path, len + 1);
         mz_path_remove_slash(name);
 
